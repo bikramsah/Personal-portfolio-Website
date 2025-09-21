@@ -447,44 +447,133 @@ body.active { overflow: hidden; }
 
 
 
-
-
-/*-----------------------------------*\
- * #HERO
-\*-----------------------------------*/
-
-main { overflow-x: hidden; }
-
+/* ===== STABLE FULL-BLEED HERO ===== */
 .hero {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding-top: 115px;
-  margin-bottom: var(--section-padding);
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    background-image: url('assets/images/banner.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: clamp(48px, 22vw, 260px);
+    padding-right: 20px;
 }
 
-.hero-banner {
-  max-width: 500px;
-  width: 125%;
-  margin-bottom: 30px;
+/* ===== HERO CONTENT ===== */
+.hero-content.left-align {
+    color: #fff;
+    text-align: left;
+    white-space: nowrap;
+    display: inline-block;
+    max-width: calc(100% - 40px);
 }
 
-:is(.hero-social-list, .scroll-down) { display: none; }
-
-.hero-content { max-width: 450px; }
-
-.hero-title {
-  text-align: center;
-  margin-bottom: 30px;
+/* Name (first line) */
+.hero-content.left-align .text-1 {
+    display: block;
+    font-size: clamp(34px, 4.2vw, 56px);
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1;
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.hero .btn-primary { margin-inline: auto; }
+/* The "I'm a ..." line */
+.hero-content.left-align .text-2 {
+    display: block;
+    font-size: clamp(20px, 2.6vw, 36px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    height: 1.2em; /* Fixed height to prevent layout shift */
+    color: #e2e8f0;
+}
 
+/* Typing animation container */
+.typing-container {
+    display: inline-block;
+    position: relative;
+}
 
+/* Typed word highlight - RED COLOR for Problem Solver */
+.typing {
+    color: #d71a2a; /* Red color */
+    font-weight: 700;
+}
 
+/* Blinking cursor animation */
+.typing::after {
+    content: "|";
+    animation: blink 1s step-end infinite;
+    color: #d71a2a; /* Red color */
+    font-weight: 400;
+}
 
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* CTA Button */
+.hero-content.left-align .btn {
+    margin: 0;
+    display: inline-block;
+    background-color: #d71a2a;
+    color: white;
+    padding: 12px 28px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    box-shadow: 0 4px 6px rgba(215, 26, 42, 0.3);
+}
+
+.hero-content.left-align .btn:hover {
+    background-color: #b91523;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(215, 26, 42, 0.4);
+}
+
+/* ===== responsive: allow wrap on narrow screens ===== */
+@media (max-width: 880px) {
+  .hero {
+    justify-content: center;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .hero-content.left-align {
+    white-space: normal !important; /* allow wrap for mobile */
+    text-align: left;
+    display: block;
+    width: 100%;
+  }
+
+  .hero-content.left-align .text-1,
+  .hero-content.left-align .text-2 {
+    font-size: clamp(20px, 5.2vw, 30px);
+    white-space: normal !important;
+  }
+
+  .hero-content.left-align .btn {
+    margin-top: 12px;
+  }
+}
 
 /*-----------------------------------*\
  * #STATS
@@ -1103,102 +1192,6 @@ textarea.input-field {
 
 
 
-  /**
-   * HERO
-   */
-
-  .hero {
-    position: relative;
-    padding-top: 0;
-    height: 100vh;
-  }
-
-  .hero-banner {
-    max-width: unset;
-    height: 100%;
-    margin-bottom: 0;
-  }
-
-  .hero img {
-    height: 100%;
-    width: auto;
-    margin-inline: auto;
-  }
-
-  .hero-content {
-    --color-primary: var(--white);
-
-    position: absolute;
-    top: 50%;
-    filter: drop-shadow(2px 4px 10px var(--black));
-  }
-
-  .hero .btn-primary:is(:hover, :focus) { color: hsl(0, 0%, 12%); }
-
-  .hero-social-list {
-    display: block;
-    position: absolute;
-    bottom: 92px;
-    left: -30px;
-  }
-
-  .hero-social-list::after {
-    content: "";
-    position: absolute;
-    bottom: -40px;
-    left: 13px;
-    width: 2px;
-    height: 30px;
-    background: var(--color-secondary);
-  }
-
-  .hero-social-link {
-    position: relative;
-    color: var(--color-secondary);
-    margin-block: 5px;
-    padding: 5px;
-    font-size: 18px;
-    transition: var(--transition-1);
-  }
-
-  .hero-social-link:is(:hover, :focus) { color: var(--color-primary); }
-
-  .hero-social-link .tooltip {
-    --trans-x: 10px;
-
-    left: calc(100% + 10px);
-    top: 50%;
-    transform: translateY(-50%) translateX(var(--trans-x));
-  }
-
-  .hero-social-link:is(:hover, :focus) .tooltip {
-    --trans-x: 0;
-    opacity: 1;
-  }
-
-  .scroll-down {
-    display: block;
-    position: absolute;
-    bottom: 80px;
-    right: -30px;
-    color: var(--color-secondary);
-    font-size: 1.125rem;
-    text-transform: uppercase;
-    transform: rotate(90deg);
-    transform-origin: top right;
-  }
-
-  .scroll-down::after {
-    content: "";
-    position: absolute;
-    top: 8px;
-    right: -50px;
-    width: 30px;
-    height: 2px;
-    background: var(--color-secondary);
-  }
-
-
 
   /**
    * STATS
@@ -1313,16 +1306,6 @@ textarea.input-field {
 
 
 
-  /**
-   * HERO
-   */
-
-  .hero-social-list { left: -80px; }
-
-  .scroll-down { right: -80px; }
-
-
-
 
   /**
    * ABOUT
@@ -1331,3 +1314,6 @@ textarea.input-field {
   .about-banner { max-width: 450px; }
 
 }
+
+
+

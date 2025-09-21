@@ -103,3 +103,18 @@ if (localStorage.getItem("theme") === "light_theme") {
   document.body.classList.remove("light_theme");
   document.body.classList.add("dark_theme");
 }
+
+// typing text animation script
+    var typed = new Typed(".typing", {
+        strings: [ "Web Developer"],
+        typeSpeed: 100,
+        backSpeed: 60,
+        loop: true
+    });
+
+    var typed = new Typed(".typing-2", {
+        strings: [ "Web Developer"],
+        typeSpeed: 100,
+        backSpeed: 60,
+        loop: true
+    });
